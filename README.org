@@ -79,3 +79,10 @@ package.json file, but its usually best to seperate the logic.
 }
 #+END_SRC
 
+* Sources
+Scratch Setup for React
+https://www.youtube.com/watch?v=EUM78cxo0i8&list=RDCMUClb90NQQcskPUGDIXsQEz5Q&start_radio=1&rv=EUM78cxo0i8&t=19
+
+Babel Tutorial
+https://www.youtube.com/watch?v=JJzrWJ83ey8
+
