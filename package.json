@@ -1,0 +1,12 @@
+{
+  "name": "crafree",
+  "version": "1.0.0",
+  "description": "* Create React App\r Usually by default you can use create-react-app to generate a react application.\r While this is convinient, it makes it so you never learn whats under the hood.\r And it also forces you to use the configuration dictated by create-react-app. \r This document will try and give a complete reference for how to create a react\r app without using create-react-app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
