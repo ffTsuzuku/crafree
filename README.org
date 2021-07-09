@@ -110,7 +110,7 @@ importance of WebPack, lets get started with installing it.
 
 #+BEGIN_SRC bash
     npm install --save-dev webpack webpack-cli webpack-dev-server 
-    npm install --save-dev html-webpack-plugin
+    npm install --save-dev html-webpack-plugin style-loader css-loader
 #+END_SRC
 
 Note The html-webpack-plugin generates an HTML File with your bundled code. 
@@ -158,9 +158,15 @@ module.exports = {
 };
 #+END_SRC 
 
+** Setting up WebPack to load css files / image files. 
+Just like we installed babel loader to connect babel to WebPack, we need a 
+loader for our CSS as well so that WebPack knows to transpile our css. If we
+want to use sass, then we need a sass loader ontop of that. If we want to load
+images in our React app, then we need a file-loader. 
+
 * Sources
 Scratch Setup for React
-https://www.youtube.com/watch?v=EUM78cxo0i8&list=RDCMUClb90NQQcskPUGDIXsQEz5Q&start_radio=1&rv=EUM78cxo0i8&t=19
+https://www.youtube.com/watch?v=EUM78cxo0i8
 
 Babel Tutorial
 https://www.youtube.com/watch?v=JJzrWJ83ey8
