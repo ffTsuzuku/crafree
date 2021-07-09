@@ -23,8 +23,14 @@ Another common use for package.json is to define *scripts*. There are other
 toolchains that make use of package.json to define properties such a *babel*. 
 However we'll dicuss that more later. 
 
+Since this is a react project the very first packages we're going to install 
+are react and react-dom.
+
+#+BEGIN_SRC bash
+npm install react react-dom
+#+END_SRC
 * Introduction to Babel 
-Generally one of the very first packages developers will install when setting up
+Generally one of packages developers will install when setting up
 their projects is babel. So let's understand why we need babel in the first 
 place. JavaScript is an every evolving language, there are supersets like
 TypeScript, frameworks like React, additions and improvements such as classes
@@ -75,7 +81,7 @@ package.json file, but its usually best to seperate the logic.
 
 #+BEGIN_SRC JSON
 {
-    "preset": ["babel/preset-env", "babel/preset-react"]
+    "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
 #+END_SRC
 
@@ -103,10 +109,11 @@ the entirety of your JavaScript source code. So now that we understand the
 importance of WebPack, lets get started with installing it. 
 
 #+BEGIN_SRC bash
-    npm install --save-dev webpack webpack-cli webpack-dev-server
+    npm install --save-dev webpack webpack-cli webpack-dev-server 
+    npm install --save-dev html-webpack-plugin
 #+END_SRC
 
-
+Note The html-webpack-plugin generates an HTML File with your bundled code. 
 ** Connecting WebPack to Babel.
 In order for WebPack to bundle all our JavaScript file we need to tell it where
 to look as well as what compiler (Babel) we want it to use to compile the  code.
@@ -117,15 +124,15 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-    entry: "./src/index.js",
-    output: {
-        filename: "bundle.[hash].js",
-        path: path.resolve(__dirname, "dist"),
-    },
+  entry: "./src/index.js",
+  output: {
+    filename: "bundle.[hash].js",
+    path: path.resolve(__dirname, "dist"),
+  },
   plugins: [
-        new HtmlWebpackPlugin({
-            template: "./src/index.html",
-        }), 
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+    }),
   ],
   resolve: {
     modules: [__dirname, "src", "node_modules"],
@@ -157,4 +164,3 @@ https://www.youtube.com/watch?v=EUM78cxo0i8&list=RDCMUClb90NQQcskPUGDIXsQEz5Q&st
 
 Babel Tutorial
 https://www.youtube.com/watch?v=JJzrWJ83ey8
-
