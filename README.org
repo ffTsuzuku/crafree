@@ -159,10 +159,21 @@ module.exports = {
 #+END_SRC 
 
 ** Setting up WebPack to load css files / image files. 
-Just like we installed babel loader to connect babel to WebPack, we need a 
-loader for our CSS as well so that WebPack knows to transpile our css. If we
-want to use sass, then we need a sass loader ontop of that. If we want to load
-images in our React app, then we need a file-loader. 
+Previously we installed babel loader in order to tell WebPack that if you run
+into a JS file use babel to transpile it. In reality JS files are not the only
+thing we can import into our JS code, we can also import css. 
+
+#+BEGIN_SRC JS
+import './styles/main.css'
+#+END_SRC
+
+However in order for WebPack to understand how to handle these css files we 
+need to install the corresponding loader for that. In order to do this, we'll
+need to install two loaders *style-loader* and *css-loader*. You may be 
+wondering why do we need two loaders for our css, and thats because css-loader
+is a plugin that helps webpack turn css files into valid javascript code, and
+style-loader is a plugin which then takes that transpiled css and inserts it
+into our html by injecting a style tag. 
 
 * Sources
 Scratch Setup for React
