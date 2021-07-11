@@ -338,11 +338,8 @@ prevent css leakage. This is why we need css-loader it allows us to modularize
 and encapsulate our css logic. 
 
 * Sources
-Scratch Setup for React
-https://www.youtube.com/watch?v=EUM78cxo0i8
+[[Scratch Setup for React][https://www.youtube.com/watch?v=EUM78cxo0i8]]
 
-Style-loader and Css-Loader explanation
-https://stackoverflow.com/questions/41878057/what-is-the-purpose-of-css-loader-in-webpack
+[[Style-loader and Css-Loader explanation][https://stackoverflow.com/questions/41878057/what-is-the-purpose-of-css-loader-in-webpack]]
 
-Babel Tutorial
-https://www.youtube.com/watch?v=JJzrWJ83ey8
+[[Babel Tutorial][https://www.youtube.com/watch?v=JJzrWJ83ey8]]
