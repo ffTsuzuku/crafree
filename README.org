@@ -176,7 +176,82 @@ is a plugin that helps webpack turn css files into valid javascript code, and
 style-loader is a plugin which then takes that transpiled css and inserts it
 into our html by injecting a style tag. 
 
-*** CSS Modules
+*** Style Loader
+#+BEGIN_SRC text
+├── components 
+│   │
+│   ├── componentA
+│   │   ├── style.css
+│   │   └── index.js
+│   │
+│   ├── componentB
+│   │   ├── style.css
+│   │   └── index.js
+│   │
+│   └── componentC
+│       ├── style.css
+│       └── index.js
+│   
+├── index.js  
+└── index.html
+#+END_SRC
+
+In order to understand the usefullness of style-loader lets consider for a 
+moment a project directory structured in the following manner. Here each 
+component has its own CSS file, that contains styles specific to that component. 
+In order to load in these components our index.html would look something like 
+this. 
+
+#+BEGIN_SRC HTML
+<link href="components/componentA/style.css" rel="stylesheet" type="text/css">
+<link href="components/componentB/style.css" rel="stylesheet" type="text/css">
+<link href="components/componentC/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="dist/bundle.js"></script>
+#+END_SRC
+
+Additionally our index.js would look something a lot like this. 
+#+BEGIN_SRC js
+import componentA() from './components/componentA'
+import componentA() from './components/componentB'
+import componentA() from './components/componentC'
+
+export default function() {
+    componentA()
+    componentB()
+    componentC()
+}
+#+END_SRC
+
+Lets say down the road componentB is no longer needed, in order to remove all 
+traces of componentB we'd have to remove it from both index.js and index.html
+#+BEGIN_SRC HTML
+<link href="components/componentA/style.css" rel="stylesheet" type="text/css">
+<!--<link href="components/componentB/style.css" rel="stylesheet" type="text/css"> -->
+<link href="components/componentC/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="dist/bundle.js"></script>
+#+END_SRC
+
+Additionally our index.js would look something a lot like this. 
+#+BEGIN_SRC js
+import componentA() from './components/componentA'
+//import componentB() from './components/componentB'
+import componentC() from './components/componentC'
+
+export default function() {
+    componentA()
+    //componentB()
+    componentC()
+}
+#+END_SRC
+
+Often developers will usually just comment out the component from index.js
+and leave the styles loaded into index.html. Style-loader can help with this
+because with style-loader we no longer have to declare our css within our
+index.html, instead style-loader will infer what css to inject into index.html
+dynamically by seeing which components are used. So with style loader all we
+need to do is comment out componentB from index.js.
+
+*** CSS Modules using CSS-loader
 If you're like me the explanation above probably left you with more questions. 
 Why do we need to convert our css to a JS and then Inject it into our
 HMTL? Why don't we just directly import our css in our HTML. How we write our 
@@ -223,7 +298,7 @@ export default function() {
 
 # Then our component B would look like this. 
 #+BEGIN_SRC JS
-import './style.css';
+import './style.css'
 
 export default function() {
   return <div className="wrapper">
@@ -237,10 +312,37 @@ because of a problem known as *leaking styles*, Its not obvious if the color
 will be blue or red because we have no idea the order in which these style 
 sheets will be loaded via style loader. CSS Modules fix this issue. 
 
+#+BEGIN_SRC JS
+// CSS Modules in componentA
+import s from './styles.css'
+
+export default function() {
+    return <div className="${s.wrapper}">
+        <div className="${s.specificToComponentA}">Component A</div>
+    </div>
+}
+#+END_SRC
+
+#+BEGIN_SRC JS
+// Exported Object S
+{
+    wrapper: "WO0HHIhH77",
+    specificToComponentA: "jPYPsVTDZU"
+}
+#+END_SRC
+
+Note how a unique string is generated for the wrapper class, and its this unique
+name that ends up getting injected into our HTML. Component B would also 
+generate a unique name for its own wrapper class, this is how css modules 
+prevent css leakage. This is why we need css-loader it allows us to modularize
+and encapsulate our css logic. 
 
 * Sources
 Scratch Setup for React
 https://www.youtube.com/watch?v=EUM78cxo0i8
+
+Style-loader and Css-Loader explanation
+https://stackoverflow.com/questions/41878057/what-is-the-purpose-of-css-loader-in-webpack
 
 Babel Tutorial
 https://www.youtube.com/watch?v=JJzrWJ83ey8
