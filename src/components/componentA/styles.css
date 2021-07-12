@@ -1,0 +1,10 @@
+.blueText {
+    color: blue;
+}
+
+.card {
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    padding: 10px;
+}
