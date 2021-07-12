@@ -337,9 +337,46 @@ generate a unique name for its own wrapper class, this is how css modules
 prevent css leakage. This is why we need css-loader it allows us to modularize
 and encapsulate our css logic. 
 
+* Cache Busting 
+You may be wondering why our webpack config also uses the HtmlWebpackPlugin. 
+Before we get into that lets take a look at another part of our webpack config. 
+
+#+BEGIN_SRC JSON
+output: {
+    filename: "bundle.[hash].js",
+    path: path.resolve(__dirname, "dist"),
+},
+#+END_SRC
+
+The filename property describes what the name of our bundled js file should be
+called. Note that included in the name are the words *"[hash]"* this 
+instructs WebPack to append a hash to our file name. 
+
+e.g 
+bundle.fjdfddkfjdk.js
+
+The reason we do this is to prevent the browser from caching our js files on 
+accident. If we push out new JS code and the browser things that it already 
+has the needed JS file then it wont bother to get the new code, by adding a 
+hash to the file name, the browser will always request the js file. There is a
+problem with this however. Normally in our index.html we'd import our JS as
+
+#+BEGIN_SRC HTML
+<script src="bundle.js"></script>
+#+END_SRC
+
+However now that our files are hashed, we need a way to dynamically insert our
+js bundle into our html file, and thats where HtmlWebpackPlugin comes in. It 
+generates a new index.html file from scratch or based on a template and inserts
+our hashed js file into it. 
+
 * Sources
+[[https://www.youtube.com/watch?v=JJzrWJ83ey8][Babel Tutorial]]
+
+[[https://www.youtube.com/watch?v=MpGLUVbqoYQ&t=2797s][Learn WebPack]]
+
 [[https://www.youtube.com/watch?v=EUM78cxo0i8][Scratch Setup for React]]
 
 [[https://stackoverflow.com/questions/41878057/what-is-the-purpose-of-css-loader-in-webpack][Style-loader and Css-Loader explanation]]
 
-[[https://www.youtube.com/watch?v=JJzrWJ83ey8][Babel Tutorial]]
+
