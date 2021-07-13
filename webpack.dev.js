@@ -11,6 +11,11 @@ module.exports = merge(common, {
   },
   plugins: [], 
   module: {
-    rules: [],
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
 });
