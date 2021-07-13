@@ -3,9 +3,13 @@
 }
 
 .card {
+    display: flex;
+    align-items: center;
     width: 400px;
     height: 200px;
     border-radius: 10px;
-    padding: 10px;
-    border: 1px solid black;
+    padding: 40px;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+    background-color: gold;
+    color: #1c78c0;
 }

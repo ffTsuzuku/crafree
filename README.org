@@ -463,6 +463,45 @@ npm install --sav-dev webpack-merge
 Once installed we can import it into our configs, and pass our dev/prod config
 into the imported merge function as shown above. 
 
+** File-Loader 
+In order to load and link to images within our react components, we can simply
+import the image within our component and use the import as an img src attribute
+
+#+BEGIN_SRC JS
+// Component A with an Image import. 
+import webpacklogo from '../../images/webpack.png'
+
+export default function() {
+    return <div className={styles.card}>
+        <h1>CRA FREE</h1>
+        <img src={webpacklogo} alt="webpack" />
+    </div>
+}
+#+END_SRC
+
+The above component won't actually load in the image, instead our 
+HtmlWebpackPlugin will detect the import and let WebPack know that it needs to
+use the appropriate loader to handle the import request. For images we can use
+the file-loader. 
+
+#+BEGIN_SRC bash
+npm install --save-dev file-loader
+#+END_SRC
+
+#+BEGIN_SRC JS
+// webpack config. 
+{
+  test: /\.(svg|png|jpg|gif)$/,
+  use: {
+    loader: "file-loader",
+    options: {
+      name: "[name].[hash].[ext]",
+      outputPath: "imgs"
+    }
+  }
+}
+#+END_SRC
+
 * Sources
 [[https://www.youtube.com/watch?v=JJzrWJ83ey8][Babel Tutorial]]
 

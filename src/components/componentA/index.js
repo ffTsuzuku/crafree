@@ -1,9 +1,14 @@
 import React from 'react'
 import styles from './ComponentA.module.css'
 
-console.log('Styles', styles)
+import webpacklogo from '../../images/webpack.png'
+const logoCss = {
+    height: 200,
+    width: 300
+}
 export default function() {
     return <div className={styles.card}>
-        <div className={styles.blueText}>Component A Styles</div>
+        <h1>CRA FREE</h1>
+        <img src={webpacklogo} alt="webpack" style={logoCss}/>
     </div>
 }
