@@ -370,6 +370,84 @@ js bundle into our html file, and thats where HtmlWebpackPlugin comes in. It
 generates a new index.html file from scratch or based on a template and inserts
 our hashed js file into it. 
 
+** Seperating WebPack Config into Dev, Production, and Common. 
+Currently we have a singular webpack config we can simplify it by breaking it
+down into components that are specific to dev environments, 
+production environments, and even a common component that is needed in both dev
+and production. 
+
+#+BEGIN_SRC bash
+cp webpack.config.js webpack.common.js
+cp webpack.config.js webpack.dev.js
+cp webpack.config.js webpack.prod.js
+rm webpack.config.js
+#+END_SRC
+
+Now with our three files created, lets trim down each file so that it contains
+only the relevant details. 
+
+*Trimming Common Config*
+For our common config we can trim out the output property, 
+
+*Trimming Dev Config*
+For our dev config we can add a mode property, change our output to be not 
+hashed, empty out all plugins and module rules. 
+
+#+BEGIN_SRC JS
+//webpack.dev.js
+const common = require('./webpack.common')
+const { merge } = require('webpack-merge')
+const path = require("path");
+
+
+module.exports = merge(common, {
+  mode: "development",
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  plugins: [], 
+  module: {
+    rules: [],
+  },
+});
+#+END_SRC
+
+Note we've added a dependency named webpack-merge, we'll talk more about this 
+later. 
+
+*Triming Production Config*
+For Production we keep our hashed output file but switch the mode to production
+
+#+BEGIN_SRC JS
+const common = require('./webpack.common')
+const { merge } = require('webpack-merge')
+const path = require("path");
+
+module.exports = merge(common, {
+  mode: "production",
+  output: {
+    filename: "bundle.[hash].js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  plugins: [],
+  module: {
+    rules: [],
+  },
+});
+#+END_SRC
+
+*** Combining WebPack configs 
+Now that we have seperated our config into three files, we need a way to import
+the common config into both dev and prod configs. Thankfully there is a plugin
+for that called webpack-merge
+
+#+BEGIN_SRC bash
+npm install --sav-dev webpack-merge
+#+END_SRC
+
+Once installed we can import it into our configs, and pass our dev/prod config
+into the imported merge function as shown above. 
 * Sources
 [[https://www.youtube.com/watch?v=JJzrWJ83ey8][Babel Tutorial]]
 

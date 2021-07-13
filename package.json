@@ -4,8 +4,8 @@
   "description": "* Create React App\r Usually by default you can use create-react-app to generate a react application.\r While this is convinient, it makes it so you never learn whats under the hood.\r And it also forces you to use the configuration dictated by create-react-app. \r This document will try and give a complete reference for how to create a react\r app without using create-react-app.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack server --hot --open",
-    "build": "webpack --config webpack.config.js --mode production"
+    "start": "webpack serve --config webpack.dev.js --open",
+    "build": "webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,8 @@
     "html-webpack-plugin": "^5.3.2",
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "css-loader": "^5.2.6",
