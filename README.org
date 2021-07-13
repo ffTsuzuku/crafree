@@ -370,6 +370,20 @@ js bundle into our html file, and thats where HtmlWebpackPlugin comes in. It
 generates a new index.html file from scratch or based on a template and inserts
 our hashed js file into it. 
 
+**NOTE** 
+You may notice that these hashes end up resulting in multiple js hash files
+in the dist directory, in order to empty out the dist folder upon each build
+we can add the clean property to our webpack config output property. 
+
+#+BEGIN_SRC JS
+// Add property clean to output property. 
+output: {
+    filename: "bundle.[hash].js",
+    path: path.resolve(__dirname, "dist"),
+    clean: true,
+},
+#+END_SRC
+
 ** Seperating WebPack Config into Dev, Production, and Common. 
 Currently we have a singular webpack config we can simplify it by breaking it
 down into components that are specific to dev environments, 
@@ -448,6 +462,7 @@ npm install --sav-dev webpack-merge
 
 Once installed we can import it into our configs, and pass our dev/prod config
 into the imported merge function as shown above. 
+
 * Sources
 [[https://www.youtube.com/watch?v=JJzrWJ83ey8][Babel Tutorial]]
 

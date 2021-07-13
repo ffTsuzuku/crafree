@@ -7,6 +7,7 @@ module.exports = merge(common, {
   output: {
     filename: "bundle.[hash].js",
     path: path.resolve(__dirname, "dist"),
+    clean: true,
   },
   plugins: [],
   module: {
